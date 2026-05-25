@@ -230,7 +230,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
       <div class="free-badge"><b>✓ 로그인 불필요</b> — 검색은 누구나 무료</div>
       <div id="upload-zone">
         <div class="dropzone" id="dropzone">
-          <input type="file" id="file-input" accept="image/*" />
+          <input type="file" id="file-input" accept="image/*,video/*" multiple />
           <div class="dz-icon">📸</div>
           <h3>사진 선택 또는 카메라 촬영</h3>
           <p>연예인·인스타·드라마 캡처 모두 OK</p>
@@ -431,7 +431,7 @@ function handleFile(file){
 
 function resetUpload(){
   uploadedURL=null;uploadedBase64=null;uploadedMime=null;
-  document.getElementById('upload-zone').innerHTML=`<div class="dropzone" id="dropzone"><input type="file" id="file-input" accept="image/*" /><div class="dz-icon">📸</div><h3>사진 선택 또는 카메라 촬영</h3><p>연예인·인스타·드라마 캡처 모두 OK</p><div class="fmt-row"><span class="fmt">JPG</span><span class="fmt">PNG</span><span class="fmt">WEBP</span><span class="fmt">최대 10MB</span></div></div>`;
+  document.getElementById('upload-zone').innerHTML=`<div class="dropzone" id="dropzone"><input type="file" id="file-input" accept="image/*,video/*" multiple /><div class="dz-icon">📸</div><h3>사진 선택 또는 카메라 촬영</h3><p>연예인·인스타·드라마 캡처 모두 OK</p><div class="fmt-row"><span class="fmt">JPG</span><span class="fmt">PNG</span><span class="fmt">WEBP</span><span class="fmt">최대 10MB</span></div></div>`;
   document.getElementById('btn-analyze').disabled=true;
   initDrop();
 }
