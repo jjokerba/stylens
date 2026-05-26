@@ -420,13 +420,18 @@ function initDrop(){
 initDrop();
 
 function handleFile(file){
-  uploadedURL=URL.createObjectURL(file);uploadedMime=file.type;
+  if(!file||!file.type.startsWith('image/'))return;
+  uploadedURL=URL.createObjectURL(file);
+  uploadedMime=file.type;
   const reader=new FileReader();
-  reader.onload=e=>{uploadedBase64=e.target.result.split(',')[1];};
+  reader.onloadend=function(){
+    uploadedBase64=reader.result.split(',')[1];
+    document.getElementById('upload-zone').innerHTML=`<div class="preview-box"><img src="${uploadedURL}" alt="미리보기"/><button class="preview-resel" onclick="resetUpload()">다시 선택</button></div>`;
+    document.getElementById('btn-analyze').disabled=false;
+    toast('✓ 이미지 선택됨');
+  };
+  reader.onerror=function(){toast('이미지 읽기 오류. 다시 시도해주세요.');};
   reader.readAsDataURL(file);
-  document.getElementById('upload-zone').innerHTML=`<div class="preview-box"><img src="${uploadedURL}" alt="미리보기"/><button class="preview-resel" onclick="resetUpload()">다시 선택</button></div>`;
-  document.getElementById('btn-analyze').disabled=false;
-  toast('✓ 이미지 선택됨');
 }
 
 function resetUpload(){
